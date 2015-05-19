@@ -1,0 +1,7 @@
+c:\Users\jsavage\Documents\Visual Studio 2013\Projects\BowlingKada\BowlingKadaTest\bin\Debug\BowlingKadaTest.dll
+c:\Users\jsavage\Documents\Visual Studio 2013\Projects\BowlingKada\BowlingKadaTest\bin\Debug\BowlingKadaTest.pdb
+c:\Users\jsavage\Documents\Visual Studio 2013\Projects\BowlingKada\BowlingKadaTest\bin\Debug\BowlingKada.exe
+c:\Users\jsavage\Documents\Visual Studio 2013\Projects\BowlingKada\BowlingKadaTest\bin\Debug\BowlingKada.pdb
+c:\Users\jsavage\Documents\Visual Studio 2013\Projects\BowlingKada\BowlingKadaTest\obj\Debug\BowlingKadaTest.csprojResolveAssemblyReference.cache
+c:\Users\jsavage\Documents\Visual Studio 2013\Projects\BowlingKada\BowlingKadaTest\obj\Debug\BowlingKadaTest.dll
+c:\Users\jsavage\Documents\Visual Studio 2013\Projects\BowlingKada\BowlingKadaTest\obj\Debug\BowlingKadaTest.pdb

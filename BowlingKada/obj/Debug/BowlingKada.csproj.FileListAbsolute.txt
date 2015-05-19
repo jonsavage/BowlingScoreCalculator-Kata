@@ -1,0 +1,6 @@
+c:\users\jsavage\documents\visual studio 2013\Projects\BowlingKada\BowlingKada\bin\Debug\BowlingKada.exe.config
+c:\users\jsavage\documents\visual studio 2013\Projects\BowlingKada\BowlingKada\obj\Debug\BowlingKada.csprojResolveAssemblyReference.cache
+c:\users\jsavage\documents\visual studio 2013\Projects\BowlingKada\BowlingKada\bin\Debug\BowlingKada.exe
+c:\users\jsavage\documents\visual studio 2013\Projects\BowlingKada\BowlingKada\bin\Debug\BowlingKada.pdb
+c:\users\jsavage\documents\visual studio 2013\Projects\BowlingKada\BowlingKada\obj\Debug\BowlingKada.exe
+c:\users\jsavage\documents\visual studio 2013\Projects\BowlingKada\BowlingKada\obj\Debug\BowlingKada.pdb
