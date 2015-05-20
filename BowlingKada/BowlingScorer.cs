@@ -5,6 +5,20 @@ namespace BowlingKada
 {
     public class BowlingScorer
     {
+
+        // Ecounter Spare
+        // score = score - (int) Char.GetNumericValue(line[i - 1]) + 10;
+
+        // Encounter [0-9]
+        // score += (int) Char.GetNumericValue(line[i])
+
+
+
+
+
+
+
+        
         public static int ScoreLine(string line)
         {
             var score = 0;
@@ -15,8 +29,7 @@ namespace BowlingKada
             {
                 if (line[i] == '/')
                 {
-                    score -= (int) Char.GetNumericValue(line[i - 1]);
-                    score += 10;
+                    score = score - (int) Char.GetNumericValue(line[i - 1]) + 10;
 
                     if (line[i + 1] == 'X')
                     {
@@ -33,6 +46,7 @@ namespace BowlingKada
                 else if (line[i] == 'X') // X??
                 {
                     score += 10;
+
                     if (line[i + 1] == 'X') // XX?
                     {
                         score += 10;
@@ -50,7 +64,7 @@ namespace BowlingKada
                         score += (int) Char.GetNumericValue(line[i + 1]);
                         score += (int) Char.GetNumericValue(line[i + 2]);
                     }
-                    else
+                    else // X[0-9]/
                     {
                         score += 10;
                     }

@@ -15,6 +15,7 @@ namespace BowlingKadaTest
             Assert.AreEqual(0, result);
         }
 
+
         [TestMethod]
         public void SinglePinTest()
         {
