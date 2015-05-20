@@ -8,74 +8,71 @@ namespace BowlingKada
         public static int ScoreLine(string line)
         {
             var score = 0;
-            var lookahead = 0;
             var frame = 0;
-            
+            var secondNumericalRollFlag = false;
 
-            for (var i = 0; i < line.Length; i++)
+            for (var i = 0; i < line.Length && frame < 10; i++)
             {
-                if (lookahead > 0)
+                if (line[i] == '/')
                 {
-                    if (line[i].Equals('X'))
+                    score -= (int) Char.GetNumericValue(line[i - 1]);
+                    score += 10;
+
+                    if (line[i + 1] == 'X')
                     {
                         score += 10;
                     }
-                    score += (int)(char.GetNumericValue(line[i]));
-                    
-                    lookahead--;
-
-                    if (i == line.Length - 1)
+                    else // Must be numerical
                     {
-                        break;
+                        score += (int)Char.GetNumericValue(line[i + 1]);
                     }
+
+                    secondNumericalRollFlag = false;
+                    frame++;
                 }
-                if (line[i].Equals('-')) // Miss '-'
-                {
-                    
-                }
-                else if (line[i].Equals('/')) // Spare '/'
-                {
-                    score += 10 - (int)(char.GetNumericValue(line[i-1]));
-                    lookahead = 1;
-                }
-                else if (line[i].Equals('X')) // Strike 'X' 
+                else if (line[i] == 'X') // X??
                 {
                     score += 10;
-                    if (i <= line.Length - 1 && line[i + 1].Equals('X')) // X @ i + 1
+                    if (line[i + 1] == 'X') // XX?
                     {
-                        score += 10; 
-                        if (i <= line.Length - 2 && line[i + 2].Equals('X')) // X @ i + 2
+                        score += 10;
+                        if (line[i + 2] == 'X') // XXX
                         {
-                            score += 10; 
+                            score += 10;
                         }
-                        else // Add 
+                        else // XX[0-9]
                         {
-                            score += (int) (char.GetNumericValue(line[i + 1]));
-                            score += (int)(char.GetNumericValue(line[i + 2]));
+                            score += (int) Char.GetNumericValue(line[i + 2]);
                         }
                     }
-                    else if (i < line.Length - 2 && line[i + 2].Equals('/'))
+                    else if (line[i + 2] != '/') // X[0-9][0-9]
+                    {
+                        score += (int) Char.GetNumericValue(line[i + 1]);
+                        score += (int) Char.GetNumericValue(line[i + 2]);
+                    }
+                    else
                     {
                         score += 10;
                     }
-                    else if(i < line.Length - 2)
-                    {
-                        score += (int)(char.GetNumericValue(line[i + 1]));
-                        score += (int)(char.GetNumericValue(line[i + 2])); 
-                    }
-                    else if (i < line.Length - 1)
-                    {
-                        score += (int)(char.GetNumericValue(line[i + 1]));
-                    }
-//                    lookahead = 2;
-                }
-                else // numerical 0-9 
-                {
-                    score += (int) (char.GetNumericValue(line[i]));
-                }
-                Console.WriteLine(score);
-            }
 
+                    secondNumericalRollFlag = false;
+                    frame++;
+                }
+                else if (line[i] != '-')
+                {
+                    score += (int) Char.GetNumericValue(line[i]);
+
+                    if (secondNumericalRollFlag)
+                    {
+                        frame++;
+                        secondNumericalRollFlag = false;
+                    }
+                    else
+                    {
+                        secondNumericalRollFlag = true;
+                    }
+                }
+            }
             return score;
         }
     }
