@@ -11,7 +11,7 @@ namespace BowlingKada
     public class BowlingScorer
     {
         private static int score = 0;
-        private static int frame = 0;
+        private static int frame = -1;
         private static bool secondNumericalRollFlag = false;
 
         //resets static vars, we need these since they take up too many lines in ScoreLine
@@ -38,7 +38,7 @@ namespace BowlingKada
             if (secondNumericalRollFlag && IsNumerical(line[linePosition], false))
             {
                 frame++;
-                secondNumericalRollFlag = false;
+//                secondNumericalRollFlag = false;
             }
             return ScoreNumerical(line, linePosition) + ScoreSpare(line, linePosition) + ScoreStrike(line, linePosition);
         }
@@ -90,6 +90,7 @@ namespace BowlingKada
             if (secondNumericalRollFlag)
             {
                 frame++;
+//                secondNumericalRollFlag = false;
             }
             secondNumericalRollFlag = !secondNumericalRollFlag;
         }
