@@ -106,7 +106,7 @@ namespace BowlingKadaTest
 
             Assert.AreEqual(10, result);
         }
-//
+
 //        [TestMethod]
 //        public void FrameTenStrikeLookaheadNumericalTest()
 //        {
