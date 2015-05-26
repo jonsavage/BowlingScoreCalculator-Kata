@@ -107,23 +107,23 @@ namespace BowlingKadaTest
             Assert.AreEqual(10, result);
         }
 
-//        [TestMethod]
-//        public void FrameTenStrikeLookaheadNumericalTest()
-//        {
-//            BowlingScorer.reset();
-//            var result = BowlingScorer.ScoreLine("0000000000000000000X11");
-//
-//            Assert.AreEqual(12, result);
-//        }
+        [TestMethod]
+        public void FrameTenStrikeLookaheadNumericalTest()
+        {
+            BowlingScorer.reset();
+            var result = BowlingScorer.ScoreLine("0000000000000000000X11");
 
-//        [TestMethod]
-//        public void FrameTenStrikeLookaheadSpareTest()
-//        {
-//            var result = BowlingScorer.ScoreLine("0000000000000000000X1/");
-//
-//            Assert.AreEqual(20, result);
-//        }
-//
+            Assert.AreEqual(12, result);
+        }
+
+        [TestMethod]
+        public void FrameTenStrikeLookaheadSpareTest()
+        {
+            var result = BowlingScorer.ScoreLine("0000000000000000000X1/");
+
+            Assert.AreEqual(20, result);
+        }
+
 //        [TestMethod]
 //        public void PerfectGameTest()
 //        {

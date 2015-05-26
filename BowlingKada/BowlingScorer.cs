@@ -25,7 +25,7 @@ namespace BowlingKada
         // Scores the entire bowling line
         public static int ScoreLine(string line)
         {
-            for(int linePosition = 0; linePosition <= line.Length && frame <= 10; linePosition++)
+            for(int linePosition = 0; linePosition <= line.Length && frame < 10; linePosition++)
             {
                 score += ScoreChar(line, linePosition, false);
             }
@@ -35,26 +35,30 @@ namespace BowlingKada
         // Scores each individual roll by trying to score the roll as '[0-9]', '/' && 'X'
         private static int ScoreChar(string line, int linePosition, bool incrementFrame)
         {
-            if (secondNumericalRollFlag && IsNumerical(line[linePosition], false))
+            if (secondNumericalRollFlag && IsNumerical(line[linePosition]))
             {
-                frame++;
-//                secondNumericalRollFlag = false;
+//                frame++;
             }
-            return ScoreNumerical(line, linePosition) + ScoreSpare(line, linePosition) + ScoreStrike(line, linePosition);
+            return ScoreNumericalWrapper(line, linePosition) + ScoreSpareWrapper(line, linePosition) + ScoreStrikeWrapper(line, linePosition);
         }
 
         // Checks to see if the char at linePoition is a '/'
         // Returns score if it is, 0 otherwise.
-        private static int ScoreSpare(string line, int linePosition)
+        private static int ScoreSpareWrapper(string line, int linePosition)
         {
 
             if (IsSpare(line[linePosition]))
             {
-                secondNumericalRollFlag = false;
-
-                return 10 - (int)Char.GetNumericValue(line[linePosition - 1]) + ScoreChar(line, linePosition + 1, false);
+                return ScoreSpareInner(line, linePosition);
             }
             return 0;
+        }
+
+        private static int ScoreSpareInner(string line, int linePosition)
+        {
+            frame++;
+            secondNumericalRollFlag = false;
+            return 10 - (int)Char.GetNumericValue(line[linePosition - 1]) + ScoreLookaheadChar(line, linePosition + 1);
         }
 
         private static bool IsSpare(Char c)
@@ -76,54 +80,100 @@ namespace BowlingKada
         }
 
         // Returns true if the passed Char is NOT '/' || 'X'
-        private static bool IsNumerical(Char c, bool flag)
+        private static bool IsNumerical(Char c)
         {
-            if (c != 'X' && c != '/' && flag)
-            {
-                handleNumerical();
-            }
-            return (c != 'X' && c != '/');
+            return c != 'X' && c != '/';
         }
 
-        private static void handleNumerical()
+
+
+        // Checks to see if the char at linePoition is a '[0-9]'
+        // Returns score if it is, 0 otherwise.
+        private static int ScoreNumericalWrapper(string line, int linePosition)
+        {
+            if (IsNumerical(line[linePosition]))
+            {
+                return ScoreNumericalInner(line, linePosition);
+            }
+            return 0;
+        }
+
+        private static int ScoreNumericalInner(string line, int linePosition)
+        {
+            trackDoubleNumerical();
+            return (int)Char.GetNumericValue(line[linePosition]);
+        }
+
+        private static void trackDoubleNumerical()
         {
             if (secondNumericalRollFlag)
             {
                 frame++;
-//                secondNumericalRollFlag = false;
             }
             secondNumericalRollFlag = !secondNumericalRollFlag;
         }
 
-        // Checks to see if the char at linePoition is a '[0-9]'
+
+
+        // Checks to see if the char at linePoition is a 'X'
         // Returns score if it is, 0 otherwise.
-        private static int ScoreNumerical(string line, int linePosition)
+        private static int ScoreStrikeWrapper(string line, int linePosition)
         {
-            if (IsNumerical(line[linePosition], true))
+            if (IsStrike(line[linePosition]))
             {
-                return (int) Char.GetNumericValue(line[linePosition]);
+                return ScoreStrikeInner(line, linePosition);
             }
             return 0;
         }
 
-        // Checks to see if the char at linePoition is a 'X'
-        // Returns score if it is, 0 otherwise.
-        private static int ScoreStrike(string line, int linePosition)
+        private static int ScoreStrikeInner(string line, int linePosition)
         {
-            if (IsStrike(line[linePosition]))
-            {
-                return 10 + ScoreChar(line, linePosition + 1, false) + ScoreChar(line, linePosition + 2, false);
-            }
-            return 0;
+            frame++;
+            secondNumericalRollFlag = false;
+            return 10 + ScoreLookaheadChar(line, linePosition + 1) + ScoreLookaheadChar(line, linePosition + 2);
+
         }
 
         private static bool IsSecondNumericalRoll(string line, int linePosition)
         {
             if (linePosition > 0)
             {
-                return IsNumerical(line[linePosition - 1], false) && IsNumerical(line[linePosition], false);
+                return IsNumerical(line[linePosition - 1]) && IsNumerical(line[linePosition]);
             }
             return false;
+        }
+
+        private static int ScoreLookaheadChar(string line, int linePosition)
+        {
+            return ScoreLookaheadNumerical(line, linePosition) + ScoreLookaheadSpare(line, linePosition) + ScoreLookaheadStrike(line, linePosition);
+        }
+
+        private static int ScoreLookaheadSpare(string line, int linePosition)
+        {
+            if (IsSpare(line[linePosition]))
+            {
+                
+                return 10 - (int)Char.GetNumericValue(line[linePosition - 1]);
+            }
+            return 0;
+        }
+
+        private static int ScoreLookaheadStrike(string line, int linePosition)
+        {
+            if (IsStrike(line[linePosition]))
+            {
+                return 10;
+            }
+            return 0;
+        }
+
+        private static int ScoreLookaheadNumerical(string line, int linePosition)
+        {
+            if (IsNumerical(line[linePosition]))
+            {
+                return (int)Char.GetNumericValue(line[linePosition]);
+            }
+            return 0;
         }
 
 
