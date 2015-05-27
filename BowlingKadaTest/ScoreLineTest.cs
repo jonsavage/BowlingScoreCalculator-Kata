@@ -30,7 +30,7 @@ namespace BowlingKadaTest
         {
             BowlingScorer.reset();
             var result = BowlingScorer.ScoreLine("11111111111111111111");
-            
+
             Assert.AreEqual(20, result);
         }
 
@@ -49,7 +49,7 @@ namespace BowlingKadaTest
             BowlingScorer.reset();
             var result = BowlingScorer.ScoreLine("X0000000000000000000");
 
-            Assert.AreEqual(10,result);
+            Assert.AreEqual(10, result);
         }
 
         [TestMethod]
@@ -119,34 +119,38 @@ namespace BowlingKadaTest
         [TestMethod]
         public void FrameTenStrikeLookaheadSpareTest()
         {
+            BowlingScorer.reset();
             var result = BowlingScorer.ScoreLine("0000000000000000000X1/");
 
             Assert.AreEqual(20, result);
         }
 
-//        [TestMethod]
-//        public void PerfectGameTest()
-//        {
-//            var result = BowlingScorer.ScoreLine("XXXXXXXXXXXX");
-//
-//            Assert.AreEqual(300, result);
-//        }
-//
-//        [TestMethod]
-//        public void AlternatingFiveSpareTest()
-//        {
-//            var result = BowlingScorer.ScoreLine("5/5/5/5/5/5/5/5/5/5/5");
-//
-//            Assert.AreEqual(150, result);
-//        }
-//
-//        [TestMethod]
-//        public void AlternatingNineMissTest()
-//        {
-//            var result = BowlingScorer.ScoreLine("9-9-9-9-9-9-9-9-9-9-");
-//
-//            Assert.AreEqual(90, result);
-//        }
-        
+        [TestMethod]
+        public void PerfectGameTest()
+        {
+            BowlingScorer.reset();
+            var result = BowlingScorer.ScoreLine("XXXXXXXXXXXX");
+
+            Assert.AreEqual(300, result);
+        }
+
+        [TestMethod]
+        public void AlternatingFiveSpareTest()
+        {
+            BowlingScorer.reset();
+            var result = BowlingScorer.ScoreLine("5/5/5/5/5/5/5/5/5/5/5");
+
+            Assert.AreEqual(150, result);
+        }
+
+        [TestMethod]
+        public void AlternatingNineMissTest()
+        {
+            BowlingScorer.reset();
+            var result = BowlingScorer.ScoreLine("9-9-9-9-9-9-9-9-9-9-");
+
+            Assert.AreEqual(90, result);
+        }
+
     }
 }

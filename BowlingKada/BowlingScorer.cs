@@ -25,7 +25,7 @@ namespace BowlingKada
         // Scores the entire bowling line
         public static int ScoreLine(string line)
         {
-            for(int linePosition = 0; linePosition <= line.Length && frame < 10; linePosition++)
+            for (int linePosition = 0; linePosition <= line.Length && frame < 10; linePosition++)
             {
                 score += ScoreChar(line, linePosition, false);
             }
@@ -37,7 +37,7 @@ namespace BowlingKada
         {
             if (secondNumericalRollFlag && IsNumerical(line[linePosition]))
             {
-//                frame++;
+                //                frame++;
             }
             return ScoreNumericalWrapper(line, linePosition) + ScoreSpareWrapper(line, linePosition) + ScoreStrikeWrapper(line, linePosition);
         }
@@ -101,7 +101,7 @@ namespace BowlingKada
         private static int ScoreNumericalInner(string line, int linePosition)
         {
             trackDoubleNumerical();
-            return (int)Char.GetNumericValue(line[linePosition]);
+            return (int)Char.GetNumericValue(line[linePosition] == '-' ? '0' : line[linePosition]);
         }
 
         private static void trackDoubleNumerical()
@@ -152,7 +152,7 @@ namespace BowlingKada
         {
             if (IsSpare(line[linePosition]))
             {
-                
+
                 return 10 - (int)Char.GetNumericValue(line[linePosition - 1]);
             }
             return 0;
@@ -187,7 +187,7 @@ namespace BowlingKada
 
 
 
-        
+
         public static int ScoreLineOld(string line)
         {
             var score = 0;
@@ -198,7 +198,7 @@ namespace BowlingKada
             {
                 if (line[i] == '/')
                 {
-                    score = score - (int) Char.GetNumericValue(line[i - 1]) + 10;
+                    score = score - (int)Char.GetNumericValue(line[i - 1]) + 10;
 
                     if (line[i + 1] == 'X')
                     {
@@ -225,13 +225,13 @@ namespace BowlingKada
                         }
                         else // XX[0-9]
                         {
-                            score += (int) Char.GetNumericValue(line[i + 2]);
+                            score += (int)Char.GetNumericValue(line[i + 2]);
                         }
                     }
                     else if (line[i + 2] != '/') // X[0-9][0-9]
                     {
-                        score += (int) Char.GetNumericValue(line[i + 1]);
-                        score += (int) Char.GetNumericValue(line[i + 2]);
+                        score += (int)Char.GetNumericValue(line[i + 1]);
+                        score += (int)Char.GetNumericValue(line[i + 2]);
                     }
                     else // X[0-9]/
                     {
@@ -243,7 +243,7 @@ namespace BowlingKada
                 }
                 else if (line[i] != '-')
                 {
-                    score += (int) Char.GetNumericValue(line[i]);
+                    score += (int)Char.GetNumericValue(line[i]);
 
                     if (secondNumericalRollFlag)
                     {
